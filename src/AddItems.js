@@ -47,11 +47,35 @@ class AddItems extends React.Component {
       const updatedItems=items.map(changeIsMarked);
       this.setState({updatedItems});
     }
+    find=(data)=>{
+        console.log(this.state.items);
+        let currentList=this.state.items;
+        let newList=[];
+
+        if(data!==""){
+
+            newList=currentList.filter(item=>{
+                return (item.value.includes(data));
+            });
+        }else{
+                newList=currentList;
+
+            }
+
+            this.setState({
+                items:newList
+            });
+
+
+        
+        
+       
+    }
     render() {
         const senddata=(this.state.items);
         return (
             <div className="list-content">
-                <SearchBar addData={this.handleSubmit} />
+                <SearchBar addData={this.handleSubmit} findData={this.find}/>
                 <List sendData={senddata} updateData={this.updateData} deleteData={this.delete} markDone={this.mark}/>
                 
             </div>
